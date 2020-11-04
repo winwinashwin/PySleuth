@@ -1,6 +1,6 @@
 from pynput import keyboard
 
-from ...core.base import BaseFeature
+from ..core.base import BaseFeature
 from ..core.signal import Signal
 
 
