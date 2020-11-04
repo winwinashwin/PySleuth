@@ -1,2 +1,7 @@
-/ScaryWitch/*
-/sources/*
+venv
+
+**/__pycache__
+
+.env
+
+old*
