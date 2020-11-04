@@ -5,7 +5,7 @@ class BaseLogger(object):
     def __init__(self):
         self.formatter = logging.Formatter('%(asctime)s: %(message)s')
     
-    def setup(self, name, file, level=logging.DEBUG):
+    def new(self, name, file, level=logging.DEBUG):
         handler = logging.FileHandler(file)
         handler.setFormatter(self.formatter)
 
