@@ -8,7 +8,7 @@ from ..base import singleton
 
 class _Logger(object):
     def __init__(self):
-        self.formatter = logging.Formatter('%(asctime)s: %(message)s')
+        self.formatter = logging.Formatter('[ %(asctime)s ]: %(message)s')
 
     def new(self, name, file, level=logging.DEBUG):
         handler = logging.FileHandler(file)
