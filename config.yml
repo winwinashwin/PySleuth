@@ -1,0 +1,13 @@
+PySleuth:
+  General:
+    program-email: pynotifs.ashwin@gmail.com # E-Mail for the program
+    admin-email: na19b001@smail.iitm.ac.in # E-Mail of Admin
+    save-data-to: /home/ashwin/pysleuth
+
+  Components:
+    Active:
+      keylogger: true
+      process-monitor: true
+
+    Process-Monitor:
+      log-every: 5 # in seconds

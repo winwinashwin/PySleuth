@@ -1,2 +1,1 @@
-from .feature import BaseFeature
-from .logger import BaseLogger
+from ._component import BaseComponent

@@ -1,38 +1,35 @@
 from pathlib import Path
+import logging
 import os
 
-from .base.logger import BaseLogger
 from .data import Data
+from ..base import singleton
 
 
+class _Logger(object):
+    def __init__(self):
+        self.formatter = logging.Formatter('%(asctime)s: %(message)s')
+
+    def new(self, name, file, level=logging.DEBUG):
+        handler = logging.FileHandler(file)
+        handler.setFormatter(self.formatter)
+
+        logger = logging.getLogger(name)
+        logger.setLevel(level)
+        logger.addHandler(handler)
+
+        return logger
+
+
+@singleton
 class Loggers:
-    __instance = None
-    loggers = dict()
+    def __init__(self):
+        self.loggers = dict()
+        if not os.path.exists(Data().getRootDir()):
+            os.mkdir(Data().getRootDir())
 
-    @staticmethod
-    def getNewLogger(name: str):
-        return Loggers.__get().__getNewLoggerImpl(name)
-
-    def __getNewLoggerImpl(self, name: str):
+    def getNewLogger(self, name: str):
         assert name not in self.loggers
 
-        self.loggers[name] = BaseLogger()
-        return self.loggers[name].new(name, Data.newLogFile(name))
-
-    @staticmethod
-    def __get():
-        """ Static access method. """
-        if Loggers.__instance == None:
-            Loggers()
-
-        return Loggers.__instance
-
-    def __init__(self):
-        """ Virtually private constructor. """
-        if Loggers.__instance != None:
-            raise Exception("This class is a singleton!")
-        else:
-            if not os.path.exists(Data.getRootDir()):
-                os.mkdir(Data.getRootDir())
-
-            Loggers.__instance = self
+        self.loggers[name] = _Logger()
+        return self.loggers[name].new(name, Data().newLogFile(name))
