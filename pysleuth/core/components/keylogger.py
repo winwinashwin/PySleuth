@@ -1,7 +1,7 @@
 from pynput import keyboard
 
-from ..core.base import BaseFeature
-from ..core.signal import Signal
+from ..base import BaseFeature
+from ..signal import Signal
 
 
 class KeyLogger(BaseFeature):

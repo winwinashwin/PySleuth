@@ -1,8 +1,8 @@
 from pathlib import Path
 import os
 
-from .core.base.logger import BaseLogger
-from .core.data import Data
+from .base.logger import BaseLogger
+from .data import Data
 
 
 class Loggers:
