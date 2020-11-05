@@ -2,13 +2,11 @@ from pathlib import Path
 import os
 
 from ..base import singleton
-from ..config_handler import ConfigHandler
-
+from ..configuration import ConfigHandler
 
 @singleton
 class Data:
     def __init__(self):
-
         subDirs = set()
         subDirs.add(self.getRootDir() / "mouse" / "shots")
         subDirs.add(self.getRootDir() / "screen")
@@ -19,7 +17,8 @@ class Data:
             os.makedirs(subDir)
 
     def getRootDir(self):
-        return Path(".") / "data"
+        root = ConfigHandler().getSettingsGeneral().save_data_to
+        return Path(os.path.join(root, "data"))
 
     def newLogFile(self, name: str):
         return self.getRootDir() / name

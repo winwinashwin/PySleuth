@@ -30,7 +30,7 @@ class ConfigHandler:
     def getSettingsGeneral(self):
         assert self._processed is not None
 
-        return self._processed.PySleuth.General.save_data_to
+        return self._processed.PySleuth.General
 
     def getActiveComponents(self):
         assert self._processed is not None
