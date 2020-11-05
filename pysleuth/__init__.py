@@ -1,6 +1,7 @@
 from .controllers import KeyLoggerController
 from .controllers import ProcessMntrController
 from .controllers import MouseMntrController
+from .controllers import ScreenMntrController
 
 from .config_handler import ConfigHandler, loadConfig
 
@@ -33,6 +34,9 @@ class PySleuth:
 
         if components.mouse_monitor:
             self._initMouseMonitor()
+        
+        if components.screen_monitor:
+            self._initScreenMonitor()
 
     def _initKeylogger(self):
         self._controllers.add(KeyLoggerController())
@@ -42,3 +46,6 @@ class PySleuth:
 
     def _initMouseMonitor(self):
         self._controllers.add(MouseMntrController())
+    
+    def _initScreenMonitor(self):
+        self._controllers.add(ScreenMntrController())

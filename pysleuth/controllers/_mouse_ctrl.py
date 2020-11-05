@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from ..core.components import MouseMonitor
+from ..core.data import Data
 from .base import BaseController
 from ..config_handler import ConfigHandler
 

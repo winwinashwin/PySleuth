@@ -9,6 +9,13 @@ PySleuth:
       keylogger: true
       process-monitor: true
       mouse-monitor: true
+      screen-monitor: true
 
     Process-Monitor:
+      log-every: 2 # in seconds
+
+    Mouse-Monitor:
+      capture-screen-on-click: true
+
+    Screen-Monitor:
       log-every: 2 # in seconds

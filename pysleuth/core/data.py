@@ -8,13 +8,18 @@ from ..config_handler import ConfigHandler
 @singleton
 class Data:
     def __init__(self):
-        os.makedirs(os.path.join(self.getRootDir(), "mouse"))
+
+        subDirs = set()
+        subDirs.add(self.getRootDir() / "mouse")
+        subDirs.add(self.getRootDir() / "screen")
+
+        for subDir in subDirs:
+            if os.path.exists(subDir):
+                continue
+            os.makedirs(subDir)
 
     def getRootDir(self):
-
         return Path(".") / "data"
 
-    def newLogFile(self, name):
-        root = self.getRootDir()
-
-        return root / name
+    def newLogFile(self, name: str):
+        return self.getRootDir() / name
