@@ -10,7 +10,7 @@ class Data:
     def __init__(self):
 
         subDirs = set()
-        subDirs.add(self.getRootDir() / "mouse")
+        subDirs.add(self.getRootDir() / "mouse" / "shots")
         subDirs.add(self.getRootDir() / "screen")
 
         for subDir in subDirs:

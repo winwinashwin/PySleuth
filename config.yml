@@ -15,7 +15,7 @@ PySleuth:
       log-every: 2 # in seconds
 
     Mouse-Monitor:
-      capture-screen-on-click: true
+      capture-screen-on-activity: true
 
     Screen-Monitor:
       log-every: 2 # in seconds

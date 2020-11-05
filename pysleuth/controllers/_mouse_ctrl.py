@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from ..core.components import MouseMonitor
+from ..core.components import MouseMonitor, saveScreenShot
 from ..core.data import Data
 from .base import BaseController
 from ..config_handler import ConfigHandler
@@ -24,3 +24,13 @@ class MouseMntrController(BaseController):
     def onMouseClick(self, x: int, y: int, button: str, pressed: bool):
         msg = f"{'Pressed' if pressed else 'Released'} {button} at ({x}, {y})"
         self.worker.log(msg)
+
+        cfg = ConfigHandler().getComponentSettings("Mouse_Monitor")
+
+        if cfg.capture_screen_on_activity:
+            self.grabScreen()
+
+    def grabScreen(self):
+        dt_string = datetime.now().strftime("%d-%m-%y %H-%M-%S")
+        filePath = Data().getRootDir() / "mouse" / "shots" / f"{dt_string}.jpg"
+        saveScreenShot(filePath)
