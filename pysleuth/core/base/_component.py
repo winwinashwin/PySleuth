@@ -16,6 +16,6 @@ class BaseComponent(threading.Thread):
     def initLogger(self, name: str) -> None:
         if not self.logger:
             self.logger = Loggers().getNewLogger(name)
-    
+
     def log(self, *args):
         self.logger.info(*args)

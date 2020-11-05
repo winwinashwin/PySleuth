@@ -34,7 +34,7 @@ class PySleuth:
 
         if components.mouse_monitor:
             self._initMouseMonitor()
-        
+
         if components.screen_monitor:
             self._initScreenMonitor()
 
@@ -46,6 +46,6 @@ class PySleuth:
 
     def _initMouseMonitor(self):
         self._controllers.add(MouseMntrController())
-    
+
     def _initScreenMonitor(self):
         self._controllers.add(ScreenMntrController())

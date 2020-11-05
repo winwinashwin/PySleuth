@@ -27,4 +27,3 @@ class ScreenMntrController(BaseController):
         dt_string = datetime.now().strftime("%d-%m-%y %H-%M-%S")
         filePath = Data().getRootDir() / "screen" / f"{dt_string}.jpg"
         saveScreenShot(filePath)
-        
