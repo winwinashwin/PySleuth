@@ -12,8 +12,8 @@ class ScreenMntrController(BaseController):
 
         self.worker = ScreenMonitor()
 
-        cfg = ConfigHandler().getComponentSettings("Screen_Monitor")
-        self.worker.setPause(cfg.log_every)
+        cfg = ConfigHandler().getCfgComponent("SCREEN_MONITOR")
+        self.worker.setPause(cfg.getint("log-every"))
 
         self.connectSlots()
 

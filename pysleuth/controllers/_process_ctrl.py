@@ -10,8 +10,8 @@ class ProcessMntrController(BaseController):
         self.worker = ProcessMonitor()
         self.worker.initLogger("proc")
 
-        cfg = ConfigHandler().getComponentSettings("Process_Monitor")
-        self.worker.setPause(cfg.log_every)
+        cfg = ConfigHandler().getCfgComponent("PROCESS_MONITOR")
+        self.worker.setPause(cfg.getint("log-every"))
 
         self.connectSlots()
 

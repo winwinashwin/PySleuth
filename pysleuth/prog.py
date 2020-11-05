@@ -23,18 +23,18 @@ class PySleuth:
             print("\nUser abort!")
 
     def _initComponents(self):
-        components = ConfigHandler().getActiveComponents()
+        components = ConfigHandler().getCfgRun()
 
-        if components.keylogger:
+        if components.getboolean("keylogger"):
             self._initKeylogger()
 
-        if components.process_monitor:
+        if components.getboolean("process-monitor"):
             self._initProcessMonitor()
 
-        if components.mouse_monitor:
+        if components.getboolean("mouse-monitor"):
             self._initMouseMonitor()
 
-        if components.screen_monitor:
+        if components.getboolean("screen-monitor"):
             self._initScreenMonitor()
 
     def _initKeylogger(self):

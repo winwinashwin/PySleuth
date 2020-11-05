@@ -25,9 +25,9 @@ class MouseMntrController(BaseController):
         msg = f"{'Pressed' if pressed else 'Released'} {button} at ({x}, {y})"
         self.worker.log(msg)
 
-        cfg = ConfigHandler().getComponentSettings("Mouse_Monitor")
+        cfg = ConfigHandler().getCfgComponent("MOUSE_MONITOR")
 
-        if cfg.capture_screen_on_activity:
+        if cfg.getboolean("capture-on-activity"):
             self.grabScreen()
 
     def grabScreen(self):

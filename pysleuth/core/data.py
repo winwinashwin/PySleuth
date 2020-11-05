@@ -4,6 +4,7 @@ import os
 from ..base import singleton
 from ..configuration import ConfigHandler
 
+
 @singleton
 class Data:
     def __init__(self):
@@ -17,7 +18,7 @@ class Data:
             os.makedirs(subDir)
 
     def getRootDir(self):
-        root = ConfigHandler().getSettingsGeneral().save_data_to
+        root = ConfigHandler().getCfgOutput().get("save-data-to")
         return Path(os.path.join(root, "data"))
 
     def newLogFile(self, name: str):

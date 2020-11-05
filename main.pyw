@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 
 envFile = Path(".") / ".env"
-cfgFile = Path(".") / "config.yml"
+cfgFile = Path(".") / "settings.cfg"
 
 
 load_dotenv(envFile)

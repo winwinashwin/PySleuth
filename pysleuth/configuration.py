@@ -1,46 +1,52 @@
-import yaml
+import configparser
+import os
+from functools import wraps
 
 from .base import singleton
 
 
-class StructDB(object):
-    def __init__(self, data):
-        for name, value in data.items():
-            setattr(self, name.replace("-", "_"), self._wrap(value))
-
-    def _wrap(self, value):
-        if isinstance(value, (tuple, list, set, frozenset)):
-            return type(value)([self._wrap(v) for v in value])
-        else:
-            return StructDB(value) if isinstance(value, dict) else value
+def settings(section: str):
+    def inner(fn):
+        def wrapped(self, component: str=""):
+            if component:
+                sec = f"{section} - {component}"
+            else:
+                sec = section
+            assert sec in self.root.sections()
+            return self.root[sec]
+        return wrapped
+    return inner
 
 
 @singleton
 class ConfigHandler:
     def __init__(self):
-        self._fileRoot = dict()
-
-        self._processed = None
+        self._fileRoot = configparser.RawConfigParser()
 
     def loadFrom(self, file: str) -> None:
-        with open(file, "r") as fp:
-            self._fileRoot = yaml.safe_load(fp)
-            self._processed = StructDB(self._fileRoot)
+        assert os.path.exists(file)
 
-    def getSettingsGeneral(self):
-        assert self._processed is not None
+        self._fileRoot.read(file)
 
-        return self._processed.PySleuth.General
+    @property
+    def root(self):
+        return self._fileRoot
 
-    def getActiveComponents(self):
-        assert self._processed is not None
+    @settings("CONTROL")
+    def getCfgControl(self):
+        pass
 
-        return self._processed.PySleuth.Components.Active
+    @settings("OUTPUT")
+    def getCfgOutput(self):
+        pass
+    
+    @settings("RUN")
+    def getCfgRun(self):
+        pass
 
-    def getComponentSettings(self, compName: str):
-        assert self._processed is not None
-
-        return getattr(self._processed.PySleuth.Components, compName)
+    @settings("COMPONENT")
+    def getCfgComponent(self, component):
+        pass
 
 
 def loadConfig(configurationFile: str):
