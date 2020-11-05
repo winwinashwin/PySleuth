@@ -4,8 +4,8 @@ from ..configuration import ConfigHandler
 
 
 class ProcessMntrController(BaseController):
-    def __init__(self):
-        super(ProcessMntrController, self).__init__()
+    def __init__(self, master):
+        super(ProcessMntrController, self).__init__(master)
 
         self.worker = ProcessMonitor()
         self.worker.initLogger("proc")

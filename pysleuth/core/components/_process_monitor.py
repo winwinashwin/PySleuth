@@ -2,7 +2,7 @@ import subprocess
 import psutil
 import time
 
-from ..base import BaseComponent
+from .base import BaseComponent
 from ..signal import Signal
 
 
