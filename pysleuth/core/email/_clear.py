@@ -5,7 +5,7 @@ from .base import BaseEmailHandler
 
 class EmailClearer(BaseEmailHandler):
     def __init__(self, progEmail: str, adminEmail: str, pwd: str):
-        super(EmailReceiver, self).__init__(progEmail, adminEmail, pwd)
+        super(EmailClearer, self).__init__(progEmail, adminEmail, pwd)
         
         self.imapUrl = "imap.gmail.com"
         self.conn = imaplib.IMAP4_SSL(self.imapUrl)

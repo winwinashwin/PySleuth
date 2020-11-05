@@ -7,8 +7,8 @@ from ..configuration import ConfigHandler
 
 
 class ScreenMntrController(BaseController):
-    def __init__(self, master):
-        super(ScreenMntrController, self).__init__(master)
+    def __init__(self):
+        super(ScreenMntrController, self).__init__()
 
         self.worker = ScreenMonitor()
 

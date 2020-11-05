@@ -7,8 +7,8 @@ from ..configuration import ConfigHandler
 
 
 class MouseMntrController(BaseController):
-    def __init__(self, master):
-        super(MouseMntrController, self).__init__(master)
+    def __init__(self):
+        super(MouseMntrController, self).__init__()
 
         self.worker = MouseMonitor()
         self.worker.initLogger("mouse/clicks")

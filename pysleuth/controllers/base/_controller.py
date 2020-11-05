@@ -2,8 +2,7 @@ import abc
 
 
 class BaseController(metaclass=abc.ABCMeta):
-    def __init__(self, master):
-        self.master = master
+    def __init__(self):
         pass
 
     @abc.abstractmethod
