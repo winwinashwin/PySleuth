@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 from ..base import singleton
 from ..config_handler import ConfigHandler
@@ -7,7 +8,7 @@ from ..config_handler import ConfigHandler
 @singleton
 class Data:
     def __init__(self):
-        pass
+        os.makedirs(os.path.join(self.getRootDir(), "mouse"))
 
     def getRootDir(self):
 
