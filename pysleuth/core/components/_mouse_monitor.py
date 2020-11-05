@@ -5,7 +5,7 @@ from ..signal import Signal
 
 
 class MouseMonitor(BaseComponent):
-    SIG_clicked = Signal(int, int, str, str)
+    SIG_clicked = Signal(int, int, str, bool)
 
     def __init__(self):
         super(MouseMonitor, self).__init__()
@@ -15,4 +15,4 @@ class MouseMonitor(BaseComponent):
         listener.start()
 
     def _emitSignal(self, x, y, button, pressed):
-        self.SIG_clicked.emit(x, y, str(button), str(pressed))
+        self.SIG_clicked.emit(x, y, str(button), pressed)

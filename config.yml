@@ -8,6 +8,7 @@ PySleuth:
     Active:
       keylogger: true
       process-monitor: true
+      mouse-monitor: true
 
     Process-Monitor:
       log-every: 2 # in seconds
