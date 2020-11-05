@@ -3,9 +3,9 @@ from .base import BaseController
 from ..config_handler import ConfigHandler
 
 
-class ProcessController(BaseController):
+class ProcessMntrController(BaseController):
     def __init__(self):
-        super(ProcessController, self).__init__()
+        super(ProcessMntrController, self).__init__()
 
         self.worker = ProcessMonitor()
         self.worker.initLogger("proc")
