@@ -3,6 +3,7 @@ from .controllers import ProcessController
 
 from .config_handler import loadConfig
 
+
 class PySleuth:
     def __init__(self):
         self._controllers = set()
