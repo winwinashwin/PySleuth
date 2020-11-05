@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from ..base import singleton
+from ..config_handler import ConfigHandler
 
 
 @singleton
@@ -9,7 +10,7 @@ class Data:
         pass
 
     def getRootDir(self):
-        # TODO: take from env file maybe?
+
         return Path(".") / "data"
 
     def newLogFile(self, name):

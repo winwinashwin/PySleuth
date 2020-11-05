@@ -1,5 +1,6 @@
 from ..core.components import ProcessMonitor
 from .base import BaseController
+from ..config_handler import ConfigHandler
 
 
 class ProcessController(BaseController):
@@ -8,6 +9,9 @@ class ProcessController(BaseController):
 
         self.worker = ProcessMonitor()
         self.worker.initLogger("proc")
+
+        cfg = ConfigHandler().getComponentSettings("Process_Monitor")
+        self.worker.setPause(cfg.log_every)
 
         self.connectSlots()
     

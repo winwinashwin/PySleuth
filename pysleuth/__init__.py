@@ -1,7 +1,7 @@
 from .controllers import KeyLoggerController
 from .controllers import ProcessController
 
-from .config_handler import loadConfig
+from .config_handler import ConfigHandler, loadConfig
 
 
 class PySleuth:
@@ -22,11 +22,12 @@ class PySleuth:
             print("\nUser abort!")
 
     def _initComponents(self):
-        # TODO: Take from configuration file
-        if True:
+        components = ConfigHandler().getActiveComponents()
+
+        if components.keylogger:
             self._initKeylogger()
 
-        if True:
+        if components.process_monitor:
             self._initProcessMonitor()
 
     def _initKeylogger(self):
