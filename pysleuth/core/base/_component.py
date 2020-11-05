@@ -8,6 +8,7 @@ class BaseComponent(threading.Thread):
         super(BaseComponent, self).__init__(*args, **kwargs)
 
         self.logger = None
+        self.daemon = True
 
     def run(self):
         pass
