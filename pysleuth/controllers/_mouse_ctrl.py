@@ -1,5 +1,8 @@
+from datetime import datetime
+
 from ..core.components import MouseMonitor
 from .base import BaseController
+from ..config_handler import ConfigHandler
 
 
 class MouseMntrController(BaseController):
@@ -18,4 +21,5 @@ class MouseMntrController(BaseController):
         self.worker.SIG_clicked.connect(self, "onMouseClick")
 
     def onMouseClick(self, x: int, y: int, button: str, pressed: bool):
-        self.worker.log(f"{'Pressed' if pressed else 'Released'} {button} at ({x}, {y})")
+        msg = f"{'Pressed' if pressed else 'Released'} {button} at ({x}, {y})"
+        self.worker.log(msg)
