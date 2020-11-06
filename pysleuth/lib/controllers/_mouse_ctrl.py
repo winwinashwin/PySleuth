@@ -11,7 +11,7 @@ class MouseMntrController(BaseController):
         super(MouseMntrController, self).__init__()
 
         self.worker = MouseMonitor()
-        self.worker.initLogger("mouse/clicks")
+        self.worker.initLogger("mouse/clicks.log")
 
         self.connectSlots()
 

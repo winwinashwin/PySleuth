@@ -34,5 +34,4 @@ update:
 
 format:
 	$(call banner,Format - AutoPEP8)
-
-	find pysleuth -type f -name "*.py" | xargs autopep8 --in-place 
+	find pysleuth -type f -name "*.py" | xargs autopep8 --in-place

@@ -24,6 +24,7 @@ class ProcessMonitor(BaseComponent):
                 p = psutil.Process(int(pid))
                 self.SIG_process.emit(str(p.name()))
             except Exception as e:
+                print(e)
                 # TODO:
                 pass
 

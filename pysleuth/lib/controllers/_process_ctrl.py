@@ -8,7 +8,7 @@ class ProcessMntrController(BaseController):
         super(ProcessMntrController, self).__init__()
 
         self.worker = ProcessMonitor()
-        self.worker.initLogger("proc")
+        self.worker.initLogger("proc.log")
 
         cfg = ConfigHandler().getCfgComponent("PROCESS_MONITOR")
         self.worker.setPause(cfg.getint("log-every"))

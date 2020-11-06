@@ -25,6 +25,7 @@ class EmailReceiver(BaseEmailHandler):
         try:
             latestMsg = msgs[-1]
         except Exception as e:
+            print(e)
             return None
 
         cmd = re.findall(self.REGEXP, str(latestMsg[0]))

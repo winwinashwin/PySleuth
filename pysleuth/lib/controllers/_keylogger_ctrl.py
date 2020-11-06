@@ -7,7 +7,7 @@ class KeyLoggerController(BaseController):
         super(KeyLoggerController, self).__init__()
 
         self.worker = KeyLogger()
-        self.worker.initLogger("keys")
+        self.worker.initLogger("keys.log")
 
         self.connectSlots()
 

