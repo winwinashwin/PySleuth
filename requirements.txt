@@ -1,5 +1,12 @@
+aiohttp==3.7.2
+async-timeout==3.0.1
+attrs==20.3.0
 autopep8==1.5.4
+chardet==3.0.4
 evdev==1.3.0
+idna==2.10
+idna-ssl==1.1.0
+multidict==5.0.0
 Pillow==8.0.1
 psutil==5.7.3
 pycodestyle==2.6.0
@@ -7,4 +14,8 @@ pynput==1.7.1
 python-dotenv==0.15.0
 python-xlib==0.28
 six==1.15.0
+telepot==12.7
 toml==0.10.2
+typing-extensions==3.7.4.3
+urllib3==1.25.11
+yarl==1.6.2
