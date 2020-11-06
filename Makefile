@@ -6,7 +6,7 @@ MAKEFLAGS   += --no-print-directory
 .SILENT       : run clean update
 
 PRJ_ROOT   := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-ENTRYPOINT := main.pyw
+ENTRYPOINT := pysleuth
 
 define banner
 	@echo -e "************************************************************\n"
@@ -31,3 +31,8 @@ update:
 	pip freeze -l > ${PRJ_ROOT}/requirements.txt
 	git add ${PRJ_ROOT}/requirements.txt
 	git commit -m "[update] requirements.txt"
+
+format:
+	$(call banner,Format - AutoPEP8)
+
+	find pysleuth -type f -name "*.py" | xargs autopep8 --in-place 
