@@ -3,7 +3,7 @@ from datetime import datetime
 from ..core.components import ScreenMonitor, saveScreenShot
 from ..core.data import Data
 from .base import BaseController
-from ..configuration import ConfigHandler
+from ..config import ConfigHandler
 
 
 class ScreenMntrController(BaseController):

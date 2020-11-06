@@ -8,7 +8,7 @@
             "name": "PySleuth",
             "type": "python",
             "request": "launch",
-            "program": "main.pyw",
+            "program": "pysleuth",
             "console": "integratedTerminal"
         }
     ]

@@ -1,4 +1,4 @@
-from .configuration import ConfigHandler, loadConfig
+from .config import ConfigHandler, loadConfig
 from .controllers import KeyLoggerController
 from .controllers import ProcessMntrController
 from .controllers import MouseMntrController
@@ -8,6 +8,7 @@ from .controllers import EmailController
 
 class Struct:
     pass
+
 
 class PySleuth:
     RUNNING = False

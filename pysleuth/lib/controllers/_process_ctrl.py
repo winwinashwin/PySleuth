@@ -1,6 +1,6 @@
 from ..core.components import ProcessMonitor
 from .base import BaseController
-from ..configuration import ConfigHandler
+from ..config import ConfigHandler
 
 
 class ProcessMntrController(BaseController):

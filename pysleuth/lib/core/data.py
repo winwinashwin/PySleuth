@@ -2,7 +2,7 @@ from pathlib import Path
 import os
 
 from ..base import singleton
-from ..configuration import ConfigHandler
+from ..config import ConfigHandler
 
 
 @singleton

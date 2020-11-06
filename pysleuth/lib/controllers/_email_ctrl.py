@@ -3,7 +3,7 @@ import time
 
 from .base import BaseController
 from ..core.email import EmailSender, EmailReceiver, EmailClearer
-from ..configuration import ConfigHandler
+from ..config import ConfigHandler
 
 
 class EmailController(BaseController):

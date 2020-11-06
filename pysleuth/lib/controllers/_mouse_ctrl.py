@@ -3,7 +3,7 @@ from datetime import datetime
 from ..core.components import MouseMonitor, saveScreenShot
 from ..core.data import Data
 from .base import BaseController
-from ..configuration import ConfigHandler
+from ..config import ConfigHandler
 
 
 class MouseMntrController(BaseController):

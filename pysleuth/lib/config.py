@@ -1,6 +1,5 @@
 import configparser
 import os
-from functools import wraps
 
 from .base import singleton
 
