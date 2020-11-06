@@ -23,10 +23,10 @@ class EmailSender(BaseEmailHandler):
         self.message["From"] = self.progEmail
         self.message["To"] = self.adminMail
         self.message["Subject"] = self.subject
-    
+
     def attachPlainText(self, message: str):
         self.message.attach(MIMEText(message, 'plain'))
-    
+
     def attachZipFile(self, filename, filepath):
         zipfile = open(filepath, "rb")
         msg = MIMEBase('application', 'zip')
@@ -35,10 +35,13 @@ class EmailSender(BaseEmailHandler):
         msg.add_header('Content-Disposition', 'attachment', filename=filename)
         self.message.attach(msg)
         zipfile.close()
-    
+
     def send(self):
         text = self.message.as_string()
         self.session.sendmail(self.progEmail, self.adminMail, text)
-    
+
     def logout(self):
-        self.session.quit()
+        try:
+            self.session.quit()
+        except smtplib.SMTPServerDisconnected as e:
+            pass

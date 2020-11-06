@@ -24,11 +24,18 @@ class ProcessMonitor(BaseComponent):
                 p = psutil.Process(int(pid))
                 self.SIG_process.emit(str(p.name()))
             except Exception as e:
-                self.SIG_process.emit("Could not retrieve process info")
+                # TODO:
+                pass
 
             time.sleep(self.pause)
 
     def setPause(self, pause: int):
+        try:
+            assert pause > 0 and pause is not None
+        except AssertionError:
+            # TODO:
+            pause = 5
+
         self.__pause = pause
 
     @property

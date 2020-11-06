@@ -10,7 +10,6 @@ cfgFile = os.path.join(projectRoot, "settings.cfg")
 load_dotenv(envFile)
 loadConfig(cfgFile)
 
-
 if __name__ == "__main__":
     from lib.app import PySleuth
 

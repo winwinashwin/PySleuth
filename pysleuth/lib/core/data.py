@@ -1,4 +1,5 @@
 from pathlib import Path
+import shutil
 import os
 
 from ..base import singleton
@@ -23,3 +24,6 @@ class Data:
 
     def newLogFile(self, name: str):
         return self.getRootDir() / name
+
+    def _compressRoot(self):
+        pass

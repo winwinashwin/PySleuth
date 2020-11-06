@@ -6,11 +6,11 @@ class BaseEmailHandler(metaclass=abc.ABCMeta):
         self.progEmail = progEmail
         self.adminMail = adminMail
         self.pwd = pwd
-    
+
     @abc.abstractmethod
     def login(self):
         pass
-    
+
     @abc.abstractmethod
     def logout(self):
         pass

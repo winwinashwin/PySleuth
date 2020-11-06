@@ -6,7 +6,7 @@ from .base import singleton
 
 def settings(section: str):
     def inner(fn):
-        def wrapped(self, component: str=""):
+        def wrapped(self, component: str = ""):
             if component:
                 sec = f"{section} - {component}"
             else:
@@ -38,7 +38,7 @@ class ConfigHandler:
     @settings("OUTPUT")
     def getCfgOutput(self):
         pass
-    
+
     @settings("RUN")
     def getCfgRun(self):
         pass

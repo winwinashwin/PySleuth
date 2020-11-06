@@ -23,6 +23,12 @@ class ScreenMonitor(BaseComponent):
             time.sleep(self.pause)
 
     def setPause(self, pause: int):
+        try:
+            assert pause > 0 and pause is not None
+        except AssertionError:
+            # TODO:
+            pause = 5
+
         self.__pause = pause
 
     @property

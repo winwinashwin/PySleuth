@@ -19,7 +19,7 @@ class ProcessMntrController(BaseController):
         self.worker.start()
 
     def connectSlots(self):
-        self.worker.SIG_process.connect(self, "onNewProcess")
+        self.worker.SIG_process.connect(self, "onLogProcess")
 
-    def onNewProcess(self, procName: str):
+    def onLogProcess(self, procName: str):
         self.worker.log(procName)
