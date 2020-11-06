@@ -14,11 +14,11 @@ class TelegramWrapper:
             resp = self._bot.getMe()
             assert resp["is_bot"]
         except AssertionError:
-            # TODO: 
+            # TODO:
             pass
         except Exception as e:
             print(e)
-            quit(1)    
+            quit(1)
 
     def spinOnce(self):
         updates = self._bot.getUpdates(self.prevID + 1)
@@ -35,14 +35,14 @@ class TelegramWrapper:
 
         msg = update["message"]["text"]
         if msg:
-            self._onNewMessage(msg)            
+            self._onNewMessage(msg)
 
     def _onNewMessage(self, msg):
         self.SIG_msgReceived.emit(msg)
-    
+
     def sendText(self, text: str):
         self._bot.sendMessage(self.adminID, text)
-    
+
     def sendDocument(self, filepath: str):
         with open(filepath, "rb") as fp:
             self._bot.sendDocument(self.adminID, fp)
