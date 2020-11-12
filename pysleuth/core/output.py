@@ -1,7 +1,9 @@
-from pathlib import Path
+import pathlib
 import logging
+import os
 
 from .._base import Singleton
+from .. import config
 
 
 def _setupLogger(name: str, file: str, formatter: str, level: int):
@@ -45,5 +47,5 @@ class Path(metaclass=Singleton):
 
     def getRootDir(self):
         # TODO:
-        root = "."
-        return Path(os.path.join(root, "data"))
+        root = config.get().general.saveDataTo
+        return pathlib.Path(os.path.join(root, "data"))

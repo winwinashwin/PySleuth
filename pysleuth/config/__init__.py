@@ -19,10 +19,10 @@ class _ConfigurationHandler(metaclass=Singleton):
     def load(self, file: str):
         with open(file, "r") as fp:
             rawConfig = yaml.safe_load(fp)
-        
+
         converted = converter(rawConfig)
         validateInput(rawConfig)
-        
+
         self._config = from_dict(data_class=Configuration, data=converted)
 
 
