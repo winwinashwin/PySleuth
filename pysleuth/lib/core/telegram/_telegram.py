@@ -8,7 +8,7 @@ class TelegramWrapper:
     def __init__(self, token: str, adminID: int):
         self.token = token
         self.adminID = adminID
-        self.prevID = 669960286
+        self.prevID = 0
         self._bot = telepot.Bot(token)
         try:
             resp = self._bot.getMe()
@@ -26,6 +26,10 @@ class TelegramWrapper:
             return
 
         update = updates[0]
+        if self.prevID == 0:
+            self.prevID = update["update_id"]
+            return
+
         self.prevID = update["update_id"]
 
         senderID = update["message"]["from"]["id"]
@@ -40,8 +44,8 @@ class TelegramWrapper:
     def _onNewMessage(self, msg):
         self.SIG_msgReceived.emit(msg)
 
-    def sendText(self, text: str):
-        self._bot.sendMessage(self.adminID, text)
+    def sendText(self, text: str, **kwargs):
+        self._bot.sendMessage(self.adminID, text, **kwargs)
 
     def sendDocument(self, filepath: str):
         with open(filepath, "rb") as fp:

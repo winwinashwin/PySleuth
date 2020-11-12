@@ -33,7 +33,7 @@ class PySleuth:
         except KeyboardInterrupt:
             pass
         except Exception as e:
-            pass
+            print(e)
         finally:
             self.onShutdown()
 
