@@ -10,15 +10,8 @@ class TelegramWrapper:
         self.adminID = adminID
         self.prevID = 0
         self._bot = telepot.Bot(token)
-        try:
-            resp = self._bot.getMe()
-            assert resp["is_bot"]
-        except AssertionError:
-            # TODO:
-            pass
-        except Exception as e:
-            print(e)
-            quit(1)
+        resp = self._bot.getMe()
+        assert resp["is_bot"]
 
     def spinOnce(self):
         updates = self._bot.getUpdates(self.prevID + 1)

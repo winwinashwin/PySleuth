@@ -8,8 +8,8 @@ from .. import config
 
 def _setupLogger(name: str, file: str, formatter: str, level: int):
     """ Generate multiple loggers as required """
-    handler = logging.FileHandler(file)
-    handler.setFormatter(formatter)
+    handler = logging.FileHandler(file, mode="w")
+    handler.setFormatter(logging.Formatter(formatter))
 
     logger = logging.getLogger(name)
     logger.setLevel(level)
@@ -22,7 +22,7 @@ class Loggers:
     @staticmethod
     def getMaster(name: str):
         logFmt = "[ %(asctime)s : %(levelname)s\t: %(name)s\t] %(message)s"
-        logFile = "master.log"
+        logFile = Path().getRootDir() / "master.log"
         logLevel = logging.INFO
 
         return _setupLogger(name, logFile, logFmt, logLevel)
@@ -46,6 +46,5 @@ class Path(metaclass=Singleton):
             os.makedirs(subDir)
 
     def getRootDir(self):
-        # TODO:
         root = config.get().general.saveDataTo
         return pathlib.Path(os.path.join(root, "data"))

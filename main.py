@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 import os
 
 from pysleuth.config import loadConfig
-from pysleuth.app import PySleuth
 
 
 projectRoot = os.path.dirname(os.path.realpath(__file__))
@@ -12,5 +11,8 @@ cfgFile = os.path.join(projectRoot, "settings.yml")
 load_dotenv(envFile)
 loadConfig(cfgFile)
 
-prog = PySleuth()
-prog.start()
+if __name__ == "__main__":
+    from pysleuth.app import PySleuth
+
+    prog = PySleuth()
+    prog.start()

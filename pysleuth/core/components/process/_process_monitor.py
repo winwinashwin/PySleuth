@@ -16,27 +16,15 @@ class ProcessMonitor(BaseComponent):
 
     def run(self):
         while True:
-            try:
-                pid = subprocess.check_output(
-                    ["xdotool", "getactivewindow", "getwindowpid"]
-                ).decode("utf-8").strip()
+            pid = subprocess.check_output(
+                ["xdotool", "getactivewindow", "getwindowpid"]
+            ).decode("utf-8").strip()
 
-                p = psutil.Process(int(pid))
-                self.SIG_process.emit(str(p.name()))
-            except Exception as e:
-                print(e)
-                # TODO:
-                pass
-
+            p = psutil.Process(int(pid))
+            self.SIG_process.emit(str(p.name()))
             time.sleep(self.pause)
 
     def setPause(self, pause: int):
-        try:
-            assert pause > 0 and pause is not None
-        except AssertionError:
-            # TODO:
-            pause = 5
-
         self.__pause = pause
 
     @property

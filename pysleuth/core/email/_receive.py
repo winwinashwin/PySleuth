@@ -26,6 +26,7 @@ class EmailReceiver(BaseEmailHandler):
             latestMsg = msgs[-1]
         except Exception as e:
             print(e)
+            # TODO: log this
             return None
 
         cmd = re.findall(self.REGEXP, str(latestMsg[0]))
@@ -34,7 +35,6 @@ class EmailReceiver(BaseEmailHandler):
             assert len(cmd) != 0
             return cmd[0]
         except AssertionError:
-            # TODO:
             return None
 
     def logout(self):

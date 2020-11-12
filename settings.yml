@@ -1,7 +1,7 @@
 General:
   control-mode: telegram # or email
   monitor-every: 3
-  save-data-to: /tmp/pysleuth
+  save-data-to: /home/ashwin/github.com/ashwin5059198/PySleuth
 
 Email:
   program-email: "pynotifs.ashwin@gmail.com"

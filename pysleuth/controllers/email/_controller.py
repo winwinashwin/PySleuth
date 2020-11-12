@@ -5,7 +5,9 @@ from .._base import BaseController
 from ...core.email import EmailSender, EmailReceiver, EmailClearer
 from ...core.signal import Signal
 from ... import config
+from ...core import output
 
+logger = output.Loggers.getMaster(__name__)
 
 class EmailController(BaseController):
     SIG_shutdown = Signal()
@@ -36,7 +38,7 @@ class EmailController(BaseController):
             assert progMail is not None
             assert password is not None
         except AssertionError as e:
-            # TODO:
+            logger.critical("Error in fetching credentials", exc_info=True)
             quit(1)
 
         self.sender = EmailSender(progMail, adminMail, password)

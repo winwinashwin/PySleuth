@@ -2,6 +2,8 @@ from ....core.components.keylogger import KeyLogger
 from ..._base import BaseController
 from ....core import output
 
+logger = output.Loggers.getMaster(__name__)
+
 
 class KeyLoggerController(BaseController):
     def __init__(self):
@@ -15,10 +17,11 @@ class KeyLoggerController(BaseController):
 
     def startWorker(self):
         self.worker.start()
+        logger.info("Keylogger active")
 
     def connectSlots(self):
         self.worker.SIG_KeyPressed.connect(self, "onKeyPress")
 
     def onKeyPress(self, key):
         self.worker.log(key)
-        logger.info("key press triggered")
+        logger.debug("key press triggered")
