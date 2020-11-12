@@ -4,8 +4,9 @@ General:
   save-data-to: /home/ashwin/github.com/ashwin5059198/PySleuth
 
 Email:
-  program-email: "pynotifs.ashwin@gmail.com"
-  admin-email: "na19b001@smail.iitm.ac.in"
+  # ignore if telegram is chosen
+  program-email: ""
+  admin-email: ""
 
 Telegram: null
 
