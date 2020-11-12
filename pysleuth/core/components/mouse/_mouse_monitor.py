@@ -1,7 +1,7 @@
 from pynput import mouse
 
 from .._base import BaseComponent
-from ..signal import Signal
+from ...signal import Signal
 
 
 class MouseMonitor(BaseComponent):

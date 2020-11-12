@@ -1,7 +1,6 @@
 import threading
 
-# TODO: fix this import
-from ...loggers import Loggers
+from ...output import Loggers
 
 
 class BaseComponent(threading.Thread):
@@ -13,7 +12,7 @@ class BaseComponent(threading.Thread):
 
     def initLogger(self, name: str) -> None:
         if not self.logger:
-            self.logger = Loggers().getNewLogger(name)
+            self.logger = Loggers.getComponent(name)
 
     def log(self, *args):
         self.logger.info(*args)

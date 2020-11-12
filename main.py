@@ -6,11 +6,11 @@ from pysleuth.config import loadConfig, get
 
 projectRoot = os.path.dirname(os.path.realpath(__file__))
 envFile = os.path.join(projectRoot, ".env")
-cfgFile = os.path.join(projectRoot, "settings.cfg")
+cfgFile = os.path.join(projectRoot, "settings.yml")
 
 load_dotenv(envFile)
 loadConfig(cfgFile)
 
 # prog = PySleuth()
 # prog.start()
-print(dir(get()))
+# print(dir(get()))

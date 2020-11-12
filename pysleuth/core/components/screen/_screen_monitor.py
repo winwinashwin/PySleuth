@@ -2,7 +2,7 @@ from PIL import ImageGrab
 import time
 
 from .._base import BaseComponent
-from ..signal import Signal
+from ...signal import Signal
 
 
 def saveScreenShot(filePath: str):
