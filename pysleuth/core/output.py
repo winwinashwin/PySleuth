@@ -8,7 +8,7 @@ from .. import config
 
 def _setupLogger(name: str, file: str, formatter: str, level: int):
     """ Generate multiple loggers as required """
-    handler = logging.FileHandler(file, mode="w")
+    handler = logging.FileHandler(file)
     handler.setFormatter(logging.Formatter(formatter))
 
     logger = logging.getLogger(name)

@@ -34,7 +34,7 @@ class PySleuth:
         except KeyboardInterrupt:
             logger.error("User abort!", exc_info=True)
         except Exception as e:
-            logger.critical("Uncaugh exception", exc_info=True)
+            logger.critical("Uncaught exception", exc_info=True)
         finally:
             self.onShutdown()
 

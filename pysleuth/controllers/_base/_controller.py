@@ -3,7 +3,7 @@ import abc
 
 class BaseController(metaclass=abc.ABCMeta):
     def __init__(self):
-        pass
+        self.isWorkerActive = False
 
     @abc.abstractmethod
     def startWorker(self):

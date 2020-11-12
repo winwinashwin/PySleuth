@@ -24,6 +24,7 @@ class ProcessMntrController(BaseController):
     def startWorker(self):
         self.worker.start()
         logger.info("Process monitoring active")
+        self.isWorkerActive = True
 
     def connectSlots(self):
         self.worker.SIG_process.connect(self, "onLogProcess")

@@ -22,6 +22,7 @@ class MouseMntrController(BaseController):
     def startWorker(self):
         self.worker.start()
         logger.info("Mouse monitoring active")
+        self.isWorkerActive = True
 
     def connectSlots(self):
         self.worker.SIG_clicked.connect(self, "onMouseClick")

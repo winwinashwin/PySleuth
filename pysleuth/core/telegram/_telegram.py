@@ -43,3 +43,7 @@ class TelegramWrapper:
     def sendDocument(self, filepath: str):
         with open(filepath, "rb") as fp:
             self._bot.sendDocument(self.adminID, fp)
+
+    def sendPhoto(self, filepath: str):
+        with open(filepath, "rb") as fp:
+            self._bot.sendPhoto(self.adminID, fp)

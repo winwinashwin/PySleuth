@@ -9,6 +9,7 @@ from ...core import output
 
 logger = output.Loggers.getMaster(__name__)
 
+
 class EmailController(BaseController):
     SIG_shutdown = Signal()
 

@@ -17,3 +17,7 @@ HELP = """
     *log mouse*
         - Send mouse activity
 """
+
+CMDERROR = """
+> If you requested a document, this error can happen if the document is empty
+"""

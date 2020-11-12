@@ -18,6 +18,7 @@ class KeyLoggerController(BaseController):
     def startWorker(self):
         self.worker.start()
         logger.info("Keylogger active")
+        self.isWorkerActive = True
 
     def connectSlots(self):
         self.worker.SIG_KeyPressed.connect(self, "onKeyPress")
