@@ -1,6 +1,5 @@
 from PIL import ImageGrab
 import time
-from io import StringIO
 
 from .._base import BaseComponent
 from ...signal import Signal
