@@ -4,7 +4,7 @@ MAKEFLAGS   += --no-print-directory
 .DEFAULT_GOAL := all
 
 PRJ_ROOT   := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-ENTRYPOINT := pysleuth
+ENTRYPOINT := main.py
 
 define banner
 	@echo -e "************************************************************\n"

