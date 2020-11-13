@@ -1,7 +1,7 @@
 General:
   control-mode: telegram # or email
   monitor-every: 3
-  save-data-to: /home/ashwin/github.com/ashwin5059198/PySleuth
+  save-data-to: /tmp/pysleuth
 
 Email:
   # ignore if telegram is chosen
